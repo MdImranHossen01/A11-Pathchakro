@@ -1,0 +1,33 @@
+
+
+
+Live Site Link : https://pathchakro-a6827.web.app
+Vercel Link: https://pathchakro-server.vercel.app
+GitHub Repository ( server ) : https://github.com/Programming-Hero-Web-Course4/b11a11-server-side-JiaPixel.git
+GitHub Repository ( client  ) : https://github.com/Programming-Hero-Web-Course4/b11a11-client-side-JiaPixel.git
+
+
+
+
+
+
+
+https://i.ibb.co/39G2sJS3/background-4-768x432.webp
+https://i.ibb.co/bgZnH3NQ/background-1-768x432.webp
+https://i.ibb.co/zh0fvZjg/background-3-768x432.jpg
+https://i.ibb.co/dwNrW6RT/background-2-768x432.jpg
+https://i.ibb.co/s9wjgH88/background-768x432.jpg
+https://i.ibb.co/Lz7XKkx2/Book-mockup-in-romantic-setting.jpg
+https://i.ibb.co/spNcLNvP/book-mockup-with-christmas-decor.jpg
+https://i.ibb.co/W43LwRPw/hand-holding-book-at-autumn-book.jpg
+https://i.ibb.co/Pz3Tvvnt/hands-hold-book.jpg
+https://i.ibb.co/qPjyscC/space-asteroid-book-mockup.jpg
+https://i.ibb.co/wr7JhDFg/lantern-book-mockup.jpg
+https://i.ibb.co/ynjMPzw6/forest-book-mockup.jpg
+https://i.ibb.co/6c95PkQF/fantasy-castle-book-mockup.jpg
+https://i.ibb.co/whNx1CPn/book-hand-mockup.jpg
+https://i.ibb.co/dwjxhbvP/dark-minimal-book-mockup.jpg
+https://i.ibb.co/prPQxCmr/minimal-book-mockup-wood-shelf.jpg
+https://i.ibb.co/kgLdKynz/multipurpose-book-mockup-3.jpg
+https://i.ibb.co/gLss5kG8/multipurpose-book-mockup-2.jpg
+https://i.ibb.co/G42GWHGh/multipurpose-book-mockup-1.jpg

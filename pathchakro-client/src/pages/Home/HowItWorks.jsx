@@ -9,12 +9,12 @@ const steps = [
         description: "Create an account with your name, email, and photo or log in with Google in just a few clicks."
     },
     {
-        icon: <FaPencilRuler size={40} className="text-secondary" />,
+        icon: <FaPencilRuler size={40} className="text-primary" />,
         title: "Step 2: Create or Submit Assignments",
         description: "Create new assignments for your friends or participate in existing ones by submitting your work."
     },
     {
-        icon: <FaGraduationCap size={40} className="text-accent" />,
+        icon: <FaGraduationCap size={40} className="text-primary" />,
         title: "Step 3: Evaluate & Learn",
         description: "Review others' submissions, provide feedback, and learn from the grades and comments you receive on your work."
     }

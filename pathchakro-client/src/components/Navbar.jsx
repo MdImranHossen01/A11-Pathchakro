@@ -1,94 +1,287 @@
-import React, { useEffect, useState } from 'react';
-// ⬇️ CORRECTION: Import from 'react-router-dom', not 'react-router'
-import { Link, NavLink, useNavigate } from 'react-router'; 
-import useAuth from '../hooks/useAuth';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState, useRef } from "react";
+import { Link, NavLink, useNavigate } from "react-router";
+import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light');
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
+  const profileRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
+        const mobileMenuButton = document.querySelector(".mobile-menu-button");
+        if (!mobileMenuButton || !mobileMenuButton.contains(event.target)) {
+          setIsMenuOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
-    document.querySelector('html').setAttribute('data-theme', theme);
+    localStorage.setItem("theme", theme);
+    document.querySelector("html").setAttribute("data-theme", theme);
   }, [theme]);
 
-  const handleToggleTheme = (e) => {
-    setTheme(e.target.checked ? 'dark' : 'light');
+  const handleToggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   const handleLogout = () => {
     logOut()
       .then(() => {
-        toast.success('Logged out successfully!');
-        navigate('/login'); // Redirect to login page after logout
+        toast.success("Logged out successfully!");
+        navigate("/login");
       })
-      .catch(err => {
-        console.error("Logout Error:", err); // Add console.error for better debugging
+      .catch((err) => {
         toast.error(err.message);
       });
   };
 
-  const navLinks = (
-    <>
-      <li><NavLink to="/">Home</NavLink></li>
-      <li><NavLink to="/assignments">Assignments</NavLink></li>
-      {user && <li><NavLink to="/pending-assignments">Pending Assignments</NavLink></li>}
-    </>
-  );
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/assignments", label: "Assignments" },
+    { path: "/about", label: "About" },
+    { path: "/contact", label: "Contact" },
+    ...(user ? [{ path: "/pending-assignments", label: "Pending" }] : []),
+  ];
+
+  const userLinks = [
+    { path: "/create-assignment", label: "Create Assignment" },
+    { path: "/my-assignments", label: "My Assignments" },
+  ];
 
   return (
-    <div className="navbar bg-base-100 shadow-lg container mx-auto">
-      {/* The rest of your Navbar JSX remains the same... */}
-      {/* ... from <div className="navbar-start"> ... */}
-      {/* ... to ... */}
-      {/* ... </div className="navbar-end"> ... */}
-      {/* The only change is the Logout button's logic and the import at the top */}
+    <header className="bg-base-100 border-b border-base-200 sticky top-0 z-50 w-full">
+      <div className="bg-base-100 w-full">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex-shrink-0 flex items-center">
+              <Link to="/" className="flex items-center gap-2">
+                <img
+                  className="h-8 w-auto"
+                  src="https://i.ibb.co/Q7R2wDsN/Pen-Book-Learning-Education-Logo-1.png"
+                  alt="Logo"
+                />
+                <span className="text-xl font-bold text-primary">
+                  Pathchakro
+                </span>
+              </Link>
+            </div>
 
-       {/* --- PASTE YOUR EXISTING NAVBAR JSX FROM HERE --- */}
-       <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-          </label>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52">
-            {navLinks}
-          </ul>
-        </div>
-        <img className='h-12 w-12' src="https://i.ibb.co/Q7R2wDsN/Pen-Book-Learning-Education-Logo-1.png" alt="" />
-        <Link to="/" className="normal-case text-xl font-bold text-primary">Pathchakro</Link>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navLinks}
-        </ul>
-      </div>
-      <div className="navbar-end gap-4">
-        <label className="swap swap-rotate">
-          <input type="checkbox" onChange={handleToggleTheme} checked={theme === 'dark'} />
-          <svg className="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
-          <svg className="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22,8.27,8.27,0,0,1,15.92,10.6,7.9,7.9,0,0,1,12.14,19.73Z"/></svg>
-        </label>
-        {user ? (
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar tooltip tooltip-left" data-tip={user.displayName}>
-              <div className="w-10 rounded-full">
-                <img src={user.photoURL} alt={user.displayName} />
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <div className="flex space-x-6">
+                {navLinks.map((link) => (
+                  <NavLink
+                    key={link.path}
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `px-1 py-2 text-sm font-medium transition-colors duration-200 ${
+                        isActive
+                          ? "text-primary border-b-2 border-primary"
+                          : "text-base-content hover:text-primary"
+                      }`
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
               </div>
-            </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52">
-              <li><Link to="/create-assignment">Create Assignment</Link></li>
-              <li><Link to="/my-assignments">My Attempted Assignments</Link></li>
-              <li className="mt-2"><button onClick={handleLogout} className="btn btn-sm btn-error text-white">Logout</button></li>
-            </ul>
+            </nav>
+
+            {/* Right Side Controls */}
+            <div className="flex items-center space-x-4">
+              {/* Theme Toggle */}
+              <button
+                onClick={handleToggleTheme}
+                className="p-2 rounded-full hover:bg-base-200 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === "light" ? (
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                )}
+              </button>
+
+              {/* User Controls */}
+              {user ? (
+                <div className="relative" ref={profileRef}>
+                  <button
+                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                    className="flex items-center space-x-2 focus:outline-none"
+                  >
+                    <img
+                      className="h-8 w-8 rounded-full object-cover"
+                      src={
+                        user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"
+                      }
+                      alt={user.displayName || "User"}
+                    />
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  {isProfileOpen && (
+                    <div className="absolute right-0 mt-2 w-56 bg-base-100 rounded-md shadow-lg py-1 border border-base-200 z-50">
+                      <div className="px-4 py-2 border-b border-base-200">
+                        <p className="text-sm font-medium">
+                          {user.displayName || "User"}
+                        </p>
+                        <p className="text-xs text-base-content/70">
+                          {user.email}
+                        </p>
+                      </div>
+                      {userLinks.map((link) => (
+                        <Link
+                          key={link.path}
+                          to={link.path}
+                          className="block px-4 py-2 text-sm hover:bg-base-200 transition-colors"
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                      <div className="border-t border-base-200 my-1"></div>
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setIsProfileOpen(false);
+                        }}
+                        className="block w-full text-left px-4 py-2 text-sm text-error hover:bg-base-200 transition-colors"
+                      >
+                        Sign out
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link to="/login" className="btn btn-primary btn-sm md:btn-md">
+                  Sign In
+                </Link>
+              )}
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden p-2 rounded-md hover:bg-base-200 focus:outline-none mobile-menu-button"
+                aria-label="Toggle menu"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
-        ) : (
-          <Link to="/login" className="btn btn-primary">Login</Link>
-        )}
+
+          {/* Mobile Menu */}
+          <div
+            className={`md:hidden ${isMenuOpen ? "block" : "hidden"}`}
+            ref={mobileMenuRef}
+          >
+            <div className="pt-2 pb-4 space-y-1 border-t border-base-200">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `block px-3 py-2 rounded-md text-base font-medium ${
+                      isActive
+                        ? "bg-primary/10 text-primary"
+                        : "text-base-content hover:bg-base-200"
+                    }`
+                  }
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+
+              {user && (
+                <>
+                  <div className="border-t border-base-200 my-2"></div>
+                  {userLinks.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-base-content hover:bg-base-200"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-error hover:bg-base-200"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-       {/* --- END OF PASTED JSX --- */}
-    </div>
+    </header>
   );
 };
 

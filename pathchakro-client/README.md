@@ -1,6 +1,6 @@
 # Pathchakro - A Collaborative Study Platform  
 
-[![Live Demo](https://img.shields.io/badge/demo-live-green?style=for-the-badge)](https://pathchakro-your-site.web.app)  
+[![Live Demo](https://img.shields.io/badge/demo-live-green?style=for-the-badge)](https://pathchakro-a6827.web.app/)  
 
 An online group-study platform where users create, share, complete, and grade assignments collaboratively. Designed to enhance learning through peer feedback and shared goals.  
 
@@ -44,7 +44,7 @@ An online group-study platform where users create, share, complete, and grade as
 - Middleware: **CORS**, **Dotenv** (for environment variables)  
 
 ## 🔗 Live Demo  
-[https://pathchakro-your-site.web.app](https://pathchakro-your-site.web.app)  
+[https://pathchakro-a6827.web.app/](https://pathchakro-a6827.web.app/)  
 
 > Note: Replace the above URL with your actual deployed link  
 

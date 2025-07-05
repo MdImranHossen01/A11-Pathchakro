@@ -46,7 +46,7 @@ An online group-study platform where users create, share, complete, and grade as
 ## 🔗 Live Demo  
 [https://pathchakro-a6827.web.app/](https://pathchakro-a6827.web.app/)  
 
-> Note: Replace the above URL with your actual deployed link  
+ 
 
 ---
 

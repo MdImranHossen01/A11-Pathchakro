@@ -5,7 +5,7 @@
 An online **group-study and assignment-sharing platform** that empowers students to **create**, **submit**, **review**, and **grade** assignments together.  
 Built for learners who want **peer-to-peer feedback**, better collaboration, and an engaging study environment.  
 
-![Pathchakro Screenshot](./2025-08-08 06_43_39-Calculator.png) <!-- Replace with actual screenshot path -->
+![Pathchakro Screenshot](/2025-08-08 06_43_39-Calculator.png) <!-- Replace with actual screenshot path -->
 
 ---
 

@@ -65,3 +65,124 @@ Built for learners who want **peer-to-peer feedback**, better collaboration, and
 **Frontend:**  
 ```bash
 npm install react-router-dom @tanstack/react-query axios tailwindcss daisyui react-icons framer-motion sweetalert2 react-hot-toast
+```
+
+**Backend**
+
+```bash
+npm install express mongodb jsonwebtoken cookie-parser cors dotenv
+```
+## 🚀 How to Run Locally
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/MdImranHossen01/A11-Pathchakro.git
+cd A11-Pathchakro
+
+```
+### 2️⃣ Install dependencies
+***Frontend:***
+```bash
+cd client
+npm install
+
+```
+***Backend:***
+```bash
+cd server
+npm install
+```
+### 3️⃣ Set up environment variables
+- Create .env files in both client and server directories and add:
+***For Client (client/.env):***
+
+```bash
+VITE_apiKey=your_api_key
+VITE_authDomain=your_project_id.firebaseapp.com
+VITE_projectId=your_project_id
+VITE_storageBucket=your_storage_bucket
+VITE_messagingSenderId=your_messaging_sender_id
+VITE_appId=your_app_id
+VITE_serverUrl=http://localhost:5000
+```
+
+***For Server (server/.env):***
+```bash
+PORT=5000
+DB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+
+```
+### 4️⃣ Run the development servers
+
+***Frontend:***
+```bash
+npm run dev
+
+```
+
+***Backend:***
+```bash
+npm start
+```
+### 5️⃣ Open in browser
+Go to: http://localhost:5173
+
+## 🤝 Contribution Guidelines
+We welcome contributions!
+
+Fork the repo
+
+1.Create a new branch
+2.Commit your changes
+3.Open a Pull Request
+
+
+### 🔗 Live Project
+🌐  Live: [https://pathchakro-a6827.web.app](https://pathchakro-a6827.web.app)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

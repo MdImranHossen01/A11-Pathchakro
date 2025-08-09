@@ -112,7 +112,7 @@ const ContactUs = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-lg">Email</h3>
-                                        <p className="text-base-content">contact@pathchakro.com</p>
+                                        <p className="text-base-content">mail@pathchakro.com</p>
                                     </div>
                                 </div>
                                 
@@ -122,7 +122,7 @@ const ContactUs = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-lg">Phone</h3>
-                                        <p className="text-base-content">+880 123 456 7890</p>
+                                        <p className="text-base-content">+8801919011101</p>
                                     </div>
                                 </div>
                                 
@@ -131,7 +131,7 @@ const ContactUs = () => {
                                         <FaClock className="text-primary text-xl" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-lg">Business Hours</h3>
+                                        <h3 className="font-semibold text-lg">Working Hours</h3>
                                         <p className="text-base-content">Monday - Friday: 9am - 6pm</p>
                                         <p className="text-base-content">Saturday: 10am - 4pm</p>
                                     </div>
@@ -143,16 +143,16 @@ const ContactUs = () => {
                         <div className="bg-white rounded-2xl shadow-xl p-8">
                             <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
                             <div className="flex space-x-4">
-                                <a href="#" className="bg-primary/10 p-3 rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
+                                <a href="https://facebook.com/" className="bg-primary/10 p-3 rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
                                     <FaFacebookF className="text-xl" />
                                 </a>
-                                <a href="#" className="bg-primary/10 p-3 rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
+                                <a href="https://twitter.com/" className="bg-primary/10 p-3 rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
                                     <FaXTwitter className="text-xl" />
                                 </a>
-                                <a href="#" className="bg-primary/10 p-3 rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
+                                <a href="https://instagram.com/" className="bg-primary/10 p-3 rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
                                     <FaInstagram className="text-xl" />
                                 </a>
-                                <a href="#" className="bg-primary/10 p-3 rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
+                                <a href="https://linkedin.com/" className="bg-primary/10 p-3 rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
                                     <FaLinkedinIn className="text-xl" />
                                 </a>
                             </div>

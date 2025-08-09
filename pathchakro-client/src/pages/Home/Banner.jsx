@@ -90,7 +90,7 @@ const Banner = () => {
                 <p className="mb-8 text-lg md:text-xl max-w-2xl mx-auto">
                   {slide.description}
                 </p>
-                <Link to={slide.link}>
+                {/* <Link to={slide.link}>
                   <motion.button
                     className="btn btn-primary btn-lg text-white font-semibold px-8 py-3 rounded-full shadow-lg"
                     whileHover={{ scale: 1.05 }}
@@ -98,7 +98,7 @@ const Banner = () => {
                   >
                     {slide.cta}
                   </motion.button>
-                </Link>
+                </Link> */}
               </motion.div>
             </div>
           </div>

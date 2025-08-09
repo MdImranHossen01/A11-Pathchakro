@@ -37,25 +37,25 @@ const Footer = () => {
           </p>
           <div className="flex space-x-4 pt-2">
             <a
-              href="#"
+              href="https://twitter.com/"
               className="text-base-content/70 hover:text-primary transition-colors"
             >
               <FaTwitter className="w-5 h-5" />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/"
               className="text-base-content/70 hover:text-primary transition-colors"
             >
               <FaLinkedin className="w-5 h-5" />
             </a>
             <a
-              href="#"
+              href="https://discord.com/"
               className="text-base-content/70 hover:text-primary transition-colors"
             >
               <FaDiscord className="w-5 h-5" />
             </a>
             <a
-              href="#"
+              href="https://github.com/"
               className="text-base-content/70 hover:text-primary transition-colors"
             >
               <FaGithub className="w-5 h-5" />
@@ -86,10 +86,10 @@ const Footer = () => {
 
             <li>
               <Link
-                to="/create-assignment"
+                to="/user-dashboard"
                 className="text-base-content/70 hover:text-primary transition-colors"
               >
-                Create Assignment
+                Dashboard
               </Link>
             </li>
           </ul>

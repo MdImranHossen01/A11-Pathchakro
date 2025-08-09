@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router'; // ✅ Corrected import
+import { useParams } from 'react-router-dom'; // ✅ Corrected import
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axiosSecure from '../../api/axios.config';
 import useAuth from '../../hooks/useAuth';

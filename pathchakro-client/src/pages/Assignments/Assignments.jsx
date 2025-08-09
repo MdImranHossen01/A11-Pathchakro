@@ -162,7 +162,7 @@ const Assignments = () => {
                             <figure><img src={assignment.thumbnailURL} alt={assignment.title} className="h-56 w-full object-cover" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{assignment.title}</h2>
-                                <p>{assignment.description.substring(0, 100)}...</p>
+                                {/* <p>{assignment.description.substring(0, 100)}...</p> */}
                                 <p>Marks: {assignment.marks}</p>
                                 <div className="badge badge-secondary">{assignment.difficulty}</div>
                                 <div className="card-actions justify-end mt-2">

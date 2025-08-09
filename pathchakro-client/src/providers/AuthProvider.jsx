@@ -21,21 +21,6 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [initialized, setInitialized] = useState(false);
   
-  // Initialize Firebase auth persistence
-  useEffect(() => {
-    const initializeAuth = async () => {
-      try {
-        // Set persistence to LOCAL so user stays logged in after page reload
-        await auth.setPersistence('local');
-        console.log("Auth persistence set to LOCAL");
-      } catch (error) {
-        console.error("Error setting auth persistence:", error);
-      }
-    };
-    
-    initializeAuth();
-  }, []);
-  
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);

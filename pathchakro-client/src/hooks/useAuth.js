@@ -56,6 +56,10 @@ const useAuth = () => {
       const response = await axiosSecure.get('/api/users/profile');
       return response.data;
     } catch (error) {
+      // If the user profile doesn't exist yet, return a default profile
+      if (error.response && error.response.status === 404) {
+        return { bio: '' };
+      }
       console.error('Error fetching user profile:', error);
       return null;
     }

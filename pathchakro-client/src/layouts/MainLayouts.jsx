@@ -5,10 +5,17 @@ import Footer from '../components/Footer';
 
 const MainLayouts = () => {
     return (
-        <div className='w-11/12 mx-auto'>
-           <Navbar></Navbar>
-           <Outlet></Outlet>
-           <Footer></Footer>
+        <div className='min-h-screen flex flex-col'>
+            {/* Full-width navbar */}
+            <Navbar />
+            
+            {/* Main content area with container */}
+            <main className='flex-grow container mx-auto px-4 py-6'>
+                <Outlet />
+            </main>
+            
+            {/* Full-width footer */}
+            <Footer />
         </div>
     );
 };

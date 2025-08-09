@@ -74,11 +74,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/assignment/:id", // Dynamic route for viewing
-        element: (
-          <PrivateRoute>
-            <ViewAssignment />
-          </PrivateRoute>
-        ),
+        element: <ViewAssignment />
       },
       {
         path: "/update-assignment/:id", // Dynamic route for updating

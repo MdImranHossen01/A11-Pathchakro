@@ -16,6 +16,10 @@ import ContactUs from "../pages/ContactUs.jsx";
 import FaqPage from "../pages/FaqPage.jsx";
 import PrivacyPolicy from "../pages/PrivacyPolicy.jsx";
 import TermsOfService from "../pages/TermsOfService.jsx";
+import UserDashboard from "../pages/UserDashboard/UserDashboard.jsx";
+import DashBoardLayout from "../pages/UserDashboard/DashBoardLayout.jsx";
+import MyProfile from "../pages/UserDashboard/MyProfile.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -27,43 +31,12 @@ const router = createBrowserRouter([
       { path: "/assignments", element: <Assignments /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-      {
-        path: "/about",
-        element: <AboutUs />,
-      },
-      {
-        path: "/contact",
-        element: <ContactUs />,
-      },
-      {
-        path: "/faq",
-        element: <FaqPage />,
-      },
-      {
-        path: "/privacy-policy",
-        element: <PrivacyPolicy />,
-      },
-      {
-        path: "/terms-of-service",
-        element: <TermsOfService />,
-      },
+      { path: "/about", element: <AboutUs /> },
+      { path: "/contact", element: <ContactUs /> },
+      { path: "/faq", element: <FaqPage /> },
+      { path: "/privacy-policy", element: <PrivacyPolicy /> },
+      { path: "/terms-of-service", element: <TermsOfService /> },
       // --- Protected Routes ---
-      {
-        path: "/create-assignment",
-        element: (
-          <PrivateRoute>
-            <CreateAssignment />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/my-assignments",
-        element: (
-          <PrivateRoute>
-            <MyAttemptedAssignments />
-          </PrivateRoute>
-        ),
-      },
       {
         path: "/pending-assignments",
         element: (
@@ -74,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/assignment/:id", // Dynamic route for viewing
-        element: <ViewAssignment />
+        element: <ViewAssignment />,
       },
       {
         path: "/update-assignment/:id", // Dynamic route for updating
@@ -83,6 +56,28 @@ const router = createBrowserRouter([
             <UpdateAssignment />
           </PrivateRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: "/user-dashboard",
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true, // This will be the default route for /user-dashboard
+        element: <MyProfile />,
+      },
+      {
+        path: "my-assignments", // Relative path to /user-dashboard/my-assignments
+        element: <MyAttemptedAssignments />,
+      },
+      {
+        path: "create-assignment", // Add this route for the create assignment page
+        element: <CreateAssignment />,
       },
     ],
   },

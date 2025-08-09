@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -63,8 +64,8 @@ const Navbar = () => {
   ];
 
   const userLinks = [
-    { path: "/create-assignment", label: "Create Assignment" },
-    { path: "/my-assignments", label: "My Assignments" },
+   
+    { path: "/user-dashboard", label: "User Dashboard" },
   ];
 
   return (
@@ -72,19 +73,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center gap-2">
-              <img
-                className="h-8 w-auto"
-                src="https://i.ibb.co/Q7R2wDsN/Pen-Book-Learning-Education-Logo-1.png"
-                alt="Logo"
-              />
-              <span className="text-xl font-bold text-primary">
-                Pathchakro
-              </span>
-            </Link>
-          </div>
-          
+         <Logo></Logo>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-6">

@@ -9,8 +9,8 @@ const MainLayouts = () => {
             {/* Full-width navbar */}
             <Navbar />
             
-            {/* Main content area with container */}
-            <main className='flex-grow container mx-auto px-4 py-6'>
+            {/* Main content area - no container here */}
+            <main className='flex-grow'>
                 <Outlet />
             </main>
             

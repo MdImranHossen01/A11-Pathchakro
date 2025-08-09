@@ -25,7 +25,7 @@ const faqData = [
 
 const Faq = () => {
     return (
-        <div className="bg-base-200 py-20">
+        <div className="bg-base-100 py-20">
             <div className="container mx-auto">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-extrabold">Frequently Asked Questions</h2>

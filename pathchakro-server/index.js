@@ -71,6 +71,115 @@ async function run() {
       res.send({ success: true, token });
     });
 
+        // --- BOOKMARKS API ---
+    // Create bookmarks collection
+    const bookmarksCollection = database.collection("bookmarks");
+
+    // Get user's bookmarks
+    app.get("/api/bookmarks", verifyToken, async (req, res) => {
+        try {
+            const { userEmail } = req.query;
+            if (userEmail !== req.user.email) {
+                return res.status(403).send({ message: "Forbidden access" });
+            }
+            
+            const cursor = bookmarksCollection.find({ userEmail });
+            const bookmarks = await cursor.toArray();
+            res.send(bookmarks);
+        } catch (error) {
+            console.error("Error fetching bookmarks:", error);
+            res.status(500).send({ message: "Error fetching bookmarks" });
+        }
+    });
+
+    // Add bookmark
+    app.post("/api/bookmarks", verifyToken, async (req, res) => {
+        try {
+            const { assignmentId, userEmail, assignmentTitle, assignmentDifficulty, assignmentMarks } = req.body;
+            
+            if (userEmail !== req.user.email) {
+                return res.status(403).send({ message: "Forbidden access" });
+            }
+
+            // Check if already bookmarked
+            const existingBookmark = await bookmarksCollection.findOne({ 
+                assignmentId, 
+                userEmail 
+            });
+
+            if (existingBookmark) {
+                return res.status(400).send({ message: "Assignment already bookmarked" });
+            }
+
+            const bookmark = {
+                assignmentId,
+                userEmail,
+                assignmentTitle,
+                assignmentDifficulty,
+                assignmentMarks,
+                createdAt: new Date()
+            };
+
+            const result = await bookmarksCollection.insertOne(bookmark);
+            res.send({ success: true, bookmark: { ...bookmark, _id: result.insertedId } });
+        } catch (error) {
+            console.error("Error creating bookmark:", error);
+            res.status(500).send({ message: "Error creating bookmark" });
+        }
+    });
+
+    // Remove bookmark
+    app.delete("/api/bookmarks/:assignmentId", verifyToken, async (req, res) => {
+        try {
+            const { assignmentId } = req.params;
+            const { userEmail } = req.query;
+
+            if (userEmail !== req.user.email) {
+                return res.status(403).send({ message: "Forbidden access" });
+            }
+
+            const result = await bookmarksCollection.deleteOne({ 
+                assignmentId, 
+                userEmail 
+            });
+
+            if (result.deletedCount === 0) {
+                return res.status(404).send({ message: "Bookmark not found" });
+            }
+
+            res.send({ success: true, message: "Bookmark removed successfully" });
+        } catch (error) {
+            console.error("Error removing bookmark:", error);
+            res.status(500).send({ message: "Error removing bookmark" });
+        }
+    });
+
+    // --- ASSIGNMENT STATISTICS API ---
+    app.get("/api/assignments/stats", async (req, res) => {
+        try {
+            const totalAssignments = await assignmentsCollection.countDocuments();
+            
+            // Get counts by difficulty
+            const easyCount = await assignmentsCollection.countDocuments({ difficulty: 'easy' });
+            const mediumCount = await assignmentsCollection.countDocuments({ difficulty: 'medium' });
+            const hardCount = await assignmentsCollection.countDocuments({ difficulty: 'hard' });
+
+            const stats = {
+                totalAssignments,
+                byDifficulty: {
+                    easy: easyCount,
+                    medium: mediumCount,
+                    hard: hardCount
+                }
+            };
+
+            res.json(stats);
+        } catch (error) {
+            console.error("Error fetching assignment statistics:", error);
+            res.status(500).json({ message: "Error fetching statistics" });
+        }
+    });
+    
     app.post("/api/auth/logout", (req, res) => {
       console.log("User logged out");
       res.send({ success: true });

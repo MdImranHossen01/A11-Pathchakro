@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link, NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import Logo from "./Logo";

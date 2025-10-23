@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router"; // ✅ Shothik import 'react-router-dom' theke
+import { Link } from "react-router-dom"; // ✅ Shothik import 'react-router-dom' theke
 import {
   FaTwitter,
   FaLinkedin,
